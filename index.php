@@ -147,7 +147,7 @@ foreach($results as $result)
       <div class="col-lg-3 col-xs-6 col-sm-3">
         <div class="fun-facts-m">
           <div class="cell">
-            <h2><i class="fa fa-user-circle-o" aria-hidden="true"></i>600+</h2>
+            <h2><i class="fa fa-user-circle-o" aria-hidden="true"></i>800+</h2>
             <p>Satisfied Customers</p>
           </div>
         </div>
