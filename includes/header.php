@@ -77,6 +77,9 @@ foreach($results as $result)
             <li><a href="post-testimonial.php">Post a Testimonial</a></li>
           <li><a href="my-testimonials.php">My Testimonial</a></li>
             <li><a href="logout.php">Sign Out</a></li>
+            <?php }
+            else{ ?>
+              <li><div class="login_btn"><a href="#loginform" class="btn btn-xs uppercase" data-toggle="modal" data-dismiss="modal">Login / Register</a></div></li>
             <?php } ?>
           </ul>
             </li>
