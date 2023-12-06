@@ -143,7 +143,7 @@ if (strlen($_SESSION['login']) == 0) {
                     if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>
                     <form method="post">
                       <div class="form-group">
-                        <label class="control-label">Reg Date -</label>
+                        <label class="control-label">Registered at -</label>
                         <?php echo htmlentities($result->RegDate); ?>
                       </div>
                       <?php if ($result->UpdationDate != "") { ?>
