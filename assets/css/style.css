@@ -3711,7 +3711,8 @@ table.info-tabel tr td {
 }
 .field-title {
   border-left: 3px solid #cecece;
-  margin: 40px 0 25px;
+ /* margin: 20px 0 25px;*/
+ margin-bottom: 20px;
   padding: 12px 13px 12px 28px;
 }
 .field-title h6 {
