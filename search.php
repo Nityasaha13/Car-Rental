@@ -129,9 +129,9 @@ where tblvehicles.VehiclesTitle=:search || tblvehicles.FuelType=:search || tblbr
               <h5><i class="fa fa-filter" aria-hidden="true"></i> Find Your Car </h5>
             </div>
             <div class="sidebar_filter">
-              <form action="#" method="get">
+              <form action="search-carresult.php" method="post">
                 <div class="form-group select">
-                  <select class="form-control">
+                  <select class="form-control" name="brand">
                     <option>Select Brand</option>
 
                     <?php $sql = "SELECT * from  tblbrands ";
@@ -148,7 +148,7 @@ where tblvehicles.VehiclesTitle=:search || tblvehicles.FuelType=:search || tblbr
                   </select>
                 </div>
                 <div class="form-group select">
-                  <select class="form-control">
+                  <select class="form-control" name="fueltype">
                     <option>Select Fuel Type</option>
                     <option value="Petrol">Petrol</option>
                     <option value="Diesel">Diesel</option>
