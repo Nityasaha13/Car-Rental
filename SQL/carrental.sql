@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 12, 2020 at 07:46 AM
--- Server version: 10.3.15-MariaDB
--- PHP Version: 7.2.19
+-- Host: localhost:3306
+-- Generation Time: Dec 07, 2023 at 07:14 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,10 +28,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `UserName` varchar(100) NOT NULL,
   `Password` varchar(100) NOT NULL,
-  `updationDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+  `updationDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -49,16 +48,16 @@ INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
 --
 
 CREATE TABLE `tblbooking` (
-  `id` int(11) NOT NULL,
-  `BookingNumber` bigint(12) DEFAULT NULL,
+  `id` int NOT NULL,
+  `BookingNumber` bigint DEFAULT NULL,
   `userEmail` varchar(100) DEFAULT NULL,
-  `VehicleId` int(11) DEFAULT NULL,
+  `VehicleId` int DEFAULT NULL,
   `FromDate` varchar(20) DEFAULT NULL,
   `ToDate` varchar(20) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
-  `Status` int(11) DEFAULT NULL,
-  `PostingDate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `LastUpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+  `Status` int DEFAULT NULL,
+  `PostingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `LastUpdationDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -67,7 +66,9 @@ CREATE TABLE `tblbooking` (
 
 INSERT INTO `tblbooking` (`id`, `BookingNumber`, `userEmail`, `VehicleId`, `FromDate`, `ToDate`, `message`, `Status`, `PostingDate`, `LastUpdationDate`) VALUES
 (1, 123456789, 'test@gmail.com', 1, '2020-07-07', '2020-07-09', 'What  is the cost?', 1, '2020-07-07 14:03:09', NULL),
-(2, 987456321, 'test@gmail.com', 4, '2020-07-19', '2020-07-24', 'hfghg', 1, '2020-07-09 17:49:21', '2020-07-11 12:20:57');
+(2, 987456321, 'test@gmail.com', 4, '2020-07-19', '2020-07-24', 'hfghg', 1, '2020-07-09 17:49:21', '2020-07-11 12:20:57'),
+(3, 339953793, 'test@gmail.com', 2, '2023-11-24', '2023-11-29', 'bjkb', 1, '2023-11-23 17:27:02', '2023-11-23 17:29:42'),
+(4, 389968915, 'test@gmail.com', 1, '2023-12-08', '2023-12-29', 'Book', 0, '2023-12-06 18:52:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -76,10 +77,10 @@ INSERT INTO `tblbooking` (`id`, `BookingNumber`, `userEmail`, `VehicleId`, `From
 --
 
 CREATE TABLE `tblbrands` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `BrandName` varchar(120) NOT NULL,
-  `CreationDate` timestamp NULL DEFAULT current_timestamp(),
-  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+  `CreationDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -101,8 +102,8 @@ INSERT INTO `tblbrands` (`id`, `BrandName`, `CreationDate`, `UpdationDate`) VALU
 --
 
 CREATE TABLE `tblcontactusinfo` (
-  `id` int(11) NOT NULL,
-  `Address` tinytext DEFAULT NULL,
+  `id` int NOT NULL,
+  `Address` tinytext,
   `EmailId` varchar(255) DEFAULT NULL,
   `ContactNo` char(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -112,7 +113,7 @@ CREATE TABLE `tblcontactusinfo` (
 --
 
 INSERT INTO `tblcontactusinfo` (`id`, `Address`, `EmailId`, `ContactNo`) VALUES
-(1, 'J&K Block, Laxmi Nagar', 'info@gmail.com', '8974561236');
+(1, 'Checkpost, Siliguri', 'ka0967711@gmail.com', '8158957656');
 
 -- --------------------------------------------------------
 
@@ -121,13 +122,13 @@ INSERT INTO `tblcontactusinfo` (`id`, `Address`, `EmailId`, `ContactNo`) VALUES
 --
 
 CREATE TABLE `tblcontactusquery` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `EmailId` varchar(120) DEFAULT NULL,
   `ContactNumber` char(11) DEFAULT NULL,
-  `Message` longtext DEFAULT NULL,
-  `PostingDate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` int(11) DEFAULT NULL
+  `Message` longtext,
+  `PostingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -144,7 +145,7 @@ INSERT INTO `tblcontactusquery` (`id`, `name`, `EmailId`, `ContactNumber`, `Mess
 --
 
 CREATE TABLE `tblpages` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `PageName` varchar(255) DEFAULT NULL,
   `type` varchar(255) NOT NULL DEFAULT '',
   `detail` longtext NOT NULL
@@ -155,10 +156,10 @@ CREATE TABLE `tblpages` (
 --
 
 INSERT INTO `tblpages` (`id`, `PageName`, `type`, `detail`) VALUES
-(1, 'Terms and Conditions', 'terms', '<P align=justify><FONT size=2><STRONG><FONT color=#990000>(1) ACCEPTANCE OF TERMS</FONT><BR><BR></STRONG>Welcome to Yahoo! India. 1Yahoo Web Services India Private Limited Yahoo\", \"we\" or \"us\" as the case may be) provides the Service (defined below) to you, subject to the following Terms of Service (\"TOS\"), which may be updated by us from time to time without notice to you. You can review the most current version of the TOS at any time at: <A href=\"http://in.docs.yahoo.com/info/terms/\">http://in.docs.yahoo.com/info/terms/</A>. In addition, when using particular Yahoo services or third party services, you and Yahoo shall be subject to any posted guidelines or rules applicable to such services which may be posted from time to time. All such guidelines or rules, which maybe subject to change, are hereby incorporated by reference into the TOS. In most cases the guides and rules are specific to a particular part of the Service and will assist you in applying the TOS to that part, but to the extent of any inconsistency between the TOS and any guide or rule, the TOS will prevail. We may also offer other services from time to time that are governed by different Terms of Services, in which case the TOS do not apply to such other services if and to the extent expressly excluded by such different Terms of Services. Yahoo also may offer other services from time to time that are governed by different Terms of Services. These TOS do not apply to such other services that are governed by different Terms of Service. </FONT></P>\r\n<P align=justify><FONT size=2>Welcome to Yahoo! India. Yahoo Web Services India Private Limited Yahoo\", \"we\" or \"us\" as the case may be) provides the Service (defined below) to you, subject to the following Terms of Service (\"TOS\"), which may be updated by us from time to time without notice to you. You can review the most current version of the TOS at any time at: </FONT><A href=\"http://in.docs.yahoo.com/info/terms/\"><FONT size=2>http://in.docs.yahoo.com/info/terms/</FONT></A><FONT size=2>. In addition, when using particular Yahoo services or third party services, you and Yahoo shall be subject to any posted guidelines or rules applicable to such services which may be posted from time to time. All such guidelines or rules, which maybe subject to change, are hereby incorporated by reference into the TOS. In most cases the guides and rules are specific to a particular part of the Service and will assist you in applying the TOS to that part, but to the extent of any inconsistency between the TOS and any guide or rule, the TOS will prevail. We may also offer other services from time to time that are governed by different Terms of Services, in which case the TOS do not apply to such other services if and to the extent expressly excluded by such different Terms of Services. Yahoo also may offer other services from time to time that are governed by different Terms of Services. These TOS do not apply to such other services that are governed by different Terms of Service. </FONT></P>\r\n<P align=justify><FONT size=2>Welcome to Yahoo! India. Yahoo Web Services India Private Limited Yahoo\", \"we\" or \"us\" as the case may be) provides the Service (defined below) to you, subject to the following Terms of Service (\"TOS\"), which may be updated by us from time to time without notice to you. You can review the most current version of the TOS at any time at: </FONT><A href=\"http://in.docs.yahoo.com/info/terms/\"><FONT size=2>http://in.docs.yahoo.com/info/terms/</FONT></A><FONT size=2>. In addition, when using particular Yahoo services or third party services, you and Yahoo shall be subject to any posted guidelines or rules applicable to such services which may be posted from time to time. All such guidelines or rules, which maybe subject to change, are hereby incorporated by reference into the TOS. In most cases the guides and rules are specific to a particular part of the Service and will assist you in applying the TOS to that part, but to the extent of any inconsistency between the TOS and any guide or rule, the TOS will prevail. We may also offer other services from time to time that are governed by different Terms of Services, in which case the TOS do not apply to such other services if and to the extent expressly excluded by such different Terms of Services. Yahoo also may offer other services from time to time that are governed by different Terms of Services. These TOS do not apply to such other services that are governed by different Terms of Service. </FONT></P>'),
-(2, 'Privacy Policy', 'privacy', '<span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span>'),
-(3, 'About Us ', 'aboutus', '<span style=\"color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px;\">We offer a varied fleet of cars, ranging from the compact. All our vehicles have air conditioning, &nbsp;power steering, electric windows. All our vehicles are bought and maintained at official dealerships only. Automatic transmission cars are available in every booking class.&nbsp;</span><span style=\"color: rgb(52, 52, 52); font-family: Arial, Helvetica, sans-serif;\">As we are not affiliated with any specific automaker, we are able to provide a variety of vehicle makes and models for customers to rent.</span><div><span style=\"color: rgb(62, 62, 62); font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif; font-size: 13px;\">Our mission is to be recognised as the global leader in Car Rental for companies and the public and private sector by partnering with our clients to provide the best and most efficient Cab Rental solutions and to achieve service excellence.</span><span style=\"color: rgb(52, 52, 52); font-family: Arial, Helvetica, sans-serif;\"><br></span></div>'),
-(11, 'FAQs', 'faqs', '																														<span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Address------Test &nbsp; &nbsp;dsfdsfds</span>');
+(1, 'Terms and Conditions', 'terms', '										<p align=\"justify\"><font size=\"4\" style=\"font-family: &quot;times new roman&quot;;\"><strong><font color=\"#990000\">(1) ACCEPTANCE OF TERMS</font><br><br></strong>Welcome to XYZ Car Rentals! By using our services, you agree to comply with the following terms. To make a reservation and access our rental services, users must be at least 18 years old. The information provided on our website is for general informational purposes, and we reserve the right to modify it without prior notice. Users are responsible for the accuracy of information provided during the reservation process, and XYZ Car Rentals retains the right to refuse service for any reason.\r\n</font></p>\r\n<p align=\"justify\"><span style=\"font-family: &quot;times new roman&quot;; font-size: large;\">We expect users to adhere to all applicable laws and regulations while utilizing our services. XYZ Car Rentals is committed to maintaining a secure and reliable platform. If you encounter any issues or have concerns, we encourage you to report them promptly. By using our services, you acknowledge and accept these terms. For any questions or clarifications regarding our terms of use, please contact us at [contact@email.com].\r\n\r\n</span></p><p align=\"justify\"><font size=\"4\" style=\"font-family: &quot;times new roman&quot;;\">Thank you for choosing XYZ Car Rentals. We strive to provide you with a seamless and enjoyable experience while ensuring a safe and compliant environment for all users.</font></p>\r\n										'),
+(2, 'Privacy Policy', 'privacy', '										<p align=\"justify&quot;<span\" style=\"color: rgb(0, 0, 0); text-align: justify;\"><span style=\"font-family: &quot;times new roman&quot;; font-size: large;\">At our Car Rentals, safeguarding your privacy is a top priority. This privacy policy outlines the information we collect, how it is used, and the measures we take to protect it. We gather personal details such as your name, contact information, driver\'s license details, and payment information to facilitate seamless rental services. Additionally, we collect usage information, including IP address and browsing details, to enhance our website and services. Rest assured, we prioritize the security of your data and employ industry-standard measures to protect it. We may share certain information with third-party service providers for transactional purposes and comply with legal obligations. You have choices regarding promotional communications and can manage your information through account settings. Our commitment is to transparency and providing you with a secure and enjoyable rental experience. For any questions or concerns about our privacy practices, feel free to reach out to us at [contact@email.com].</span></p>\r\n										'),
+(3, 'About Us ', 'aboutus', '																				<div class=\"page_content\"><div style=\"text-align: justify;\"><span style=\"font-family: &quot;times new roman&quot;; font-size: large; color: rgb(51, 51, 51);\">We offer a varied fleet of cars, ranging from the compact. All our vehicles have air conditioning, &nbsp;power steering, electric windows. All our vehicles are bought and maintained at official dealerships only. Automatic transmission cars are available in every booking class.&nbsp;</span><span style=\"font-family: &quot;times new roman&quot;; font-size: large; color: rgb(52, 52, 52);\">As we are not affiliated with any specific automaker, we are able to provide a variety of vehicle makes and models for customers to rent.</span></div><div style=\"text-align: justify;\"><span style=\"color: rgb(52, 52, 52); font-family: &quot;times new roman&quot;; font-size: large;\"><br></span></div><div style=\"text-align: justify; \"><span style=\"color: rgb(62, 62, 62); font-family: &quot;times new roman&quot;; font-size: large;\">Our mission is to be recognised as the global leader in Car Rental for companies and the public and private sector by partnering with our clients to provide the best and most efficient Cab Rental solutions and to achieve service excellence.</span><span style=\"color: rgb(52, 52, 52); font-family: Arial, Helvetica, sans-serif;\"><br></span></div></div>\r\n										\r\n										'),
+(11, 'FAQs', 'faqs', '																																																<div class=\"faq-qna\"><span style=\"color: rgb(0, 0, 0); text-align: left; font-size: large; font-family: &quot;times new roman&quot;;\"><h3 style=\"\"><span style=\"font-weight: bold;\">What is the minimum age requirement to rent a car?</span></h3><p style=\"\">The minimum age requirement to rent a car is typically 21 years old. However, some companies may rent to drivers as young as 18 with a young renter fee.</p><h3 style=\"\"><span style=\"font-weight: bold;\">What are your rental rates?</span></h3><p style=\"\">Our rental rates vary depending on the type of car, the rental location, and the length of the rental. You can get an estimate by entering your rental information into our online booking tool.</p> &nbsp; &nbsp;</span></div>\r\n										\r\n										');
 
 -- --------------------------------------------------------
 
@@ -167,9 +168,9 @@ INSERT INTO `tblpages` (`id`, `PageName`, `type`, `detail`) VALUES
 --
 
 CREATE TABLE `tblsubscribers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `SubscriberEmail` varchar(120) DEFAULT NULL,
-  `PostingDate` timestamp NULL DEFAULT current_timestamp()
+  `PostingDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -178,7 +179,8 @@ CREATE TABLE `tblsubscribers` (
 
 INSERT INTO `tblsubscribers` (`id`, `SubscriberEmail`, `PostingDate`) VALUES
 (4, 'harish@gmail.com', '2020-07-07 09:26:21'),
-(5, 'kunal@gmail.com', '2020-07-07 09:35:07');
+(5, 'kunal@gmail.com', '2020-07-07 09:35:07'),
+(6, 'nitya@appycodes.com', '2023-12-07 17:18:56');
 
 -- --------------------------------------------------------
 
@@ -187,11 +189,11 @@ INSERT INTO `tblsubscribers` (`id`, `SubscriberEmail`, `PostingDate`) VALUES
 --
 
 CREATE TABLE `tbltestimonial` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `UserEmail` varchar(100) NOT NULL,
   `Testimonial` mediumtext NOT NULL,
-  `PostingDate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` int(11) DEFAULT NULL
+  `PostingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -199,7 +201,8 @@ CREATE TABLE `tbltestimonial` (
 --
 
 INSERT INTO `tbltestimonial` (`id`, `UserEmail`, `Testimonial`, `PostingDate`, `status`) VALUES
-(1, 'test@gmail.com', 'I am satisfied with their service great job', '2020-07-07 14:30:12', 1);
+(1, 'test@gmail.com', 'I am satisfied with their service great job', '2020-07-07 14:30:12', 1),
+(2, 'test@gmail.com', 'Good service', '2023-12-06 18:53:32', 1);
 
 -- --------------------------------------------------------
 
@@ -208,7 +211,7 @@ INSERT INTO `tbltestimonial` (`id`, `UserEmail`, `Testimonial`, `PostingDate`, `
 --
 
 CREATE TABLE `tblusers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `FullName` varchar(120) DEFAULT NULL,
   `EmailId` varchar(100) DEFAULT NULL,
   `Password` varchar(100) DEFAULT NULL,
@@ -217,8 +220,8 @@ CREATE TABLE `tblusers` (
   `Address` varchar(255) DEFAULT NULL,
   `City` varchar(100) DEFAULT NULL,
   `Country` varchar(100) DEFAULT NULL,
-  `RegDate` timestamp NULL DEFAULT current_timestamp(),
-  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+  `RegDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -226,7 +229,8 @@ CREATE TABLE `tblusers` (
 --
 
 INSERT INTO `tblusers` (`id`, `FullName`, `EmailId`, `Password`, `ContactNo`, `dob`, `Address`, `City`, `Country`, `RegDate`, `UpdationDate`) VALUES
-(1, 'Test', 'test@gmail.com', 'f925916e2754e5e03f75dd58a5733251', '6465465465', '', 'L-890, Gaur City Ghaziabad', 'Ghaziabad', 'India', '2020-07-07 14:00:49', '2020-07-12 05:44:29');
+(1, 'Nitya', 'test@gmail.com', 'f925916e2754e5e03f75dd58a5733251', '6465465465', '', 'Siliguri', 'Siliguri', 'India', '2020-07-07 14:00:49', '2023-12-06 18:09:28'),
+(2, 'nitya', 'nitya@gmail.com', '9c6db9fc2351dff814b3b09bc3185520', 'nitya', NULL, NULL, NULL, NULL, '2023-11-23 17:30:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -235,33 +239,33 @@ INSERT INTO `tblusers` (`id`, `FullName`, `EmailId`, `Password`, `ContactNo`, `d
 --
 
 CREATE TABLE `tblvehicles` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `VehiclesTitle` varchar(150) DEFAULT NULL,
-  `VehiclesBrand` int(11) DEFAULT NULL,
-  `VehiclesOverview` longtext DEFAULT NULL,
-  `PricePerDay` int(11) DEFAULT NULL,
+  `VehiclesBrand` int DEFAULT NULL,
+  `VehiclesOverview` longtext,
+  `PricePerDay` int DEFAULT NULL,
   `FuelType` varchar(100) DEFAULT NULL,
-  `ModelYear` int(6) DEFAULT NULL,
-  `SeatingCapacity` int(11) DEFAULT NULL,
+  `ModelYear` int DEFAULT NULL,
+  `SeatingCapacity` int DEFAULT NULL,
   `Vimage1` varchar(120) DEFAULT NULL,
   `Vimage2` varchar(120) DEFAULT NULL,
   `Vimage3` varchar(120) DEFAULT NULL,
   `Vimage4` varchar(120) DEFAULT NULL,
   `Vimage5` varchar(120) DEFAULT NULL,
-  `AirConditioner` int(11) DEFAULT NULL,
-  `PowerDoorLocks` int(11) DEFAULT NULL,
-  `AntiLockBrakingSystem` int(11) DEFAULT NULL,
-  `BrakeAssist` int(11) DEFAULT NULL,
-  `PowerSteering` int(11) DEFAULT NULL,
-  `DriverAirbag` int(11) DEFAULT NULL,
-  `PassengerAirbag` int(11) DEFAULT NULL,
-  `PowerWindows` int(11) DEFAULT NULL,
-  `CDPlayer` int(11) DEFAULT NULL,
-  `CentralLocking` int(11) DEFAULT NULL,
-  `CrashSensor` int(11) DEFAULT NULL,
-  `LeatherSeats` int(11) DEFAULT NULL,
-  `RegDate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+  `AirConditioner` int DEFAULT NULL,
+  `PowerDoorLocks` int DEFAULT NULL,
+  `AntiLockBrakingSystem` int DEFAULT NULL,
+  `BrakeAssist` int DEFAULT NULL,
+  `PowerSteering` int DEFAULT NULL,
+  `DriverAirbag` int DEFAULT NULL,
+  `PassengerAirbag` int DEFAULT NULL,
+  `PowerWindows` int DEFAULT NULL,
+  `CDPlayer` int DEFAULT NULL,
+  `CentralLocking` int DEFAULT NULL,
+  `CrashSensor` int DEFAULT NULL,
+  `LeatherSeats` int DEFAULT NULL,
+  `RegDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -351,61 +355,61 @@ ALTER TABLE `tblvehicles`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblbooking`
 --
 ALTER TABLE `tblbooking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblbrands`
 --
 ALTER TABLE `tblbrands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tblcontactusinfo`
 --
 ALTER TABLE `tblcontactusinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblcontactusquery`
 --
 ALTER TABLE `tblcontactusquery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblpages`
 --
 ALTER TABLE `tblpages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tblsubscribers`
 --
 ALTER TABLE `tblsubscribers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbltestimonial`
 --
 ALTER TABLE `tbltestimonial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tblusers`
 --
 ALTER TABLE `tblusers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tblvehicles`
 --
 ALTER TABLE `tblvehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
