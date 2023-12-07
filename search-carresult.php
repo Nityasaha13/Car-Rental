@@ -122,16 +122,16 @@ error_reporting(0);
           } ?>
         </div>
 
-        <!--Side-Bar-->
-        <aside class="col-md-3 col-md-pull-9">
+       <!--Side-Bar-->
+       <aside class="col-md-3 col-md-pull-9">
           <div class="sidebar_widget">
             <div class="widget_heading">
               <h5><i class="fa fa-filter" aria-hidden="true"></i> Find Your Car </h5>
             </div>
             <div class="sidebar_filter">
-              <form action="#" method="get">
+              <form action="search-carresult.php" method="post">
                 <div class="form-group select">
-                  <select class="form-control">
+                  <select class="form-control" name="brand">
                     <option>Select Brand</option>
 
                     <?php $sql = "SELECT * from  tblbrands ";
@@ -148,7 +148,7 @@ error_reporting(0);
                   </select>
                 </div>
                 <div class="form-group select">
-                  <select class="form-control">
+                  <select class="form-control" name="fueltype">
                     <option>Select Fuel Type</option>
                     <option value="Petrol">Petrol</option>
                     <option value="Diesel">Diesel</option>
